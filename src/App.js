@@ -35,7 +35,7 @@ class App extends React.Component {
 			<div className="app">
 				<BrowserRouter>
 					<Routes>
-						<Route path='/' element={<MainPage
+						<Route exact path='/' element={<MainPage
 							bookList={this.state.books}
 							switchShelf={this.switchShelf}
 						/>} />
