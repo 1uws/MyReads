@@ -28,10 +28,8 @@ class MainPage extends React.Component {
 									<ol className="books-grid">
 										{this.props.bookList.filter(anyBook => shelf.id === anyBook.shelf).map(book =>
 											<Book
-												key={book.title}
-												width={book.width}
-												height={book.height}
-												backgroundImage={book.backgroundImage}
+												key={book.id}
+												backgroundImage={book.imageLinks.thumbnail}
 												title={book.title}
 												authors={book.authors}
 												shelf={book.shelf}

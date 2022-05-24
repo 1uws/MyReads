@@ -5,7 +5,7 @@ class Book extends React.Component {
 			<li>
 				<div className="book">
 					<div className="book-top">
-						<div className="book-cover" style={{ width: this.props.width, height: this.props.height, backgroundImage: this.props.backgroundImage }}></div>
+						<div className="book-cover" style={{width: 128, height: 192,  backgroundImage: `url(${this.props.backgroundImage})`}}></div>
 						<div className="book-shelf-changer">
 							<select
 								value={this.props.shelf}
