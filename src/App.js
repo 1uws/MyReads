@@ -10,20 +10,29 @@ class App extends React.Component {
 	}
 	componentDidMount() {
 		BooksAPI.getAll().then((books) => {
-			console.log(books);
 			this.setState(() => ({
 				books
 			}));
-		})
+		});
 	}
-	switchShelf = (title, newShelf) => {
+	switchShelf = (book, newShelf) => {
 		this.setState((preState) => {
+			let addBook=true;
 			for (let i = 0; i < preState.books.length; ++i) {
-				if (title === preState.books[i].title) {
+				if (book.id === preState.books[i].id) {
 					preState.books[i].shelf = newShelf;
-					BooksAPI.update(preState.books[i],newShelf);
+					BooksAPI.update(preState.books[i], newShelf);
+					addBook=false;
+					if ('none' === newShelf) {
+						preState.books.splice(i, 1);
+					}
 					break;
 				}
+			}
+			if (addBook){
+				book.shelf = newShelf;
+				preState.books.push(book);
+				BooksAPI.update(book, newShelf);
 			}
 			return ({
 				books: preState.books,
@@ -39,7 +48,9 @@ class App extends React.Component {
 							bookList={this.state.books}
 							switchShelf={this.switchShelf}
 						/>} />
-						<Route path='/search' element={<SearchPage />} />
+						<Route path='/search' element={<SearchPage
+							bookList={this.state.books}
+							switchShelf={this.switchShelf} />} />
 					</Routes>
 				</BrowserRouter>
 			</div>
